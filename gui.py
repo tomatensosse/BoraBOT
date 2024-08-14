@@ -35,11 +35,18 @@ def start_gui():
 
     root = tk.Tk()
     root.title("Trading Bot")
-    root.geometry("1200x720")
+    root.geometry("400x300")
 
-    img = PhotoImage(file='src/app.png')
-    root.iconphoto(True, img)
-    root.iconbitmap('src/app.bmp')
+    try:
+        root.iconbitmap('src/app.bmp')
+    except Exception as e:
+        print(f"Could not set .ico icon: {e}")
+
+    try:
+        img = PhotoImage(file='src/app.png')
+        root.iconphoto(True, img)
+    except Exception as e:
+        print(f"Could not set .png or .gif icon: {e}")
 
     start_button = tk.Button(root, text="Start", command=on_start)
     start_button.pack(pady=10)

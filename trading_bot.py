@@ -19,14 +19,15 @@ def execute_strategy():
     df['ma'] = ta.trend.sma_indicator(df['close'], window=14)
 
     if strategy.should_buy(df):
-        print("Buy signal")
         buy_price = df['close'].iloc[-1]
         trades.append({'buy_price': buy_price, 'sell_price': None})
+        print(f"Buy signal | {buy_price}")
     elif strategy.should_sell(df):
-        print("Sell signal")
+        sell_price = "nothing to sell"
         if trades and trades[-1]['sell_price'] is None:
             sell_price = df['close'].iloc[-1]
             trades[-1]['sell_price'] = sell_price
+        print(f"Sell signal | {sell_price}")
     elif strategy.should_hold(df):
         print("Hold signal")
     else:
